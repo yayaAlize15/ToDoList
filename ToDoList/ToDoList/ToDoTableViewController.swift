@@ -34,7 +34,8 @@ class ToDoTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        return listOfToDo.count
+        
     }
 
     
@@ -53,14 +54,14 @@ class ToDoTableViewController: UITableViewController {
         return cell
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let nextAddToDoTVC = segue.destination as? AddToDoViewController {
+            nextAddToDoTVC.previousToDoTVC = self
+        }
     }
-    */
 
 }
