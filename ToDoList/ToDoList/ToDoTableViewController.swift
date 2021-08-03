@@ -53,7 +53,6 @@ class ToDoTableViewController: UITableViewController {
 
         return cell
     }
-
     
     // MARK: - Navigation
 
@@ -62,6 +61,20 @@ class ToDoTableViewController: UITableViewController {
         if let nextAddToDoTVC = segue.destination as? AddToDoViewController {
             nextAddToDoTVC.previousToDoTVC = self
         }
+        
+        if let nextCompleteToDoVC = segue.destination as? CompleteToDoViewController {
+            if let choosenToDo = sender as? ToDoClass {
+                nextCompleteToDoVC.selectedToDo = choosenToDo
+                nextCompleteToDoVC.previousToDoTVC = self
+            }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+         let eachToDo = listOfToDo[indexPath.row]
+
+         performSegue(withIdentifier: "moveToCompletedToDoVC", sender: eachToDo)
     }
 
 }
