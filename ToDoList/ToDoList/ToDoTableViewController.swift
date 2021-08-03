@@ -9,15 +9,25 @@ import UIKit
 
 class ToDoTableViewController: UITableViewController {
 
-    var listOfToDo : [ToDoClass] = []
+    //var listOfToDo : [ToDoClass] = []
+    var listOfToDo : [ToDoCD] = []
+    
+    func getToDos() {
+        if let accessToCoreData = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            if let dataFromCoreData = try? accessToCoreData.fetch(ToDoCD.fetchRequest()) as? [ToDoCD]{
+                listOfToDo = dataFromCoreData
+                tableView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        listOfToDo = createToDo()
+        //listOfToDo = createToDo()
     }
     
-    func createToDo() -> [ToDoClass] {
+    /*func createToDo() -> [ToDoClass] {
         
         let swiftToDo = ToDoClass()
         swiftToDo.description = "Learn Swift"
@@ -28,7 +38,7 @@ class ToDoTableViewController: UITableViewController {
         //important is set to false by default
         
         return [swiftToDo, dogToDo]
-    }
+    }*/
     
     // MARK: - Table view data source
 
